@@ -101,9 +101,21 @@ const puzzleInput = [
   145569
 ];
 
-const sum = puzzleInput.reduce((total, module) => {
+const firstProblem = puzzleInput.reduce((total, module) => {
   let fuelNeeded = Math.floor(module / 3) - 2;
   return fuelNeeded + total;
 }, 0);
 
-console.log(sum);
+console.log(firstProblem);
+
+const secondProblem = puzzleInput.reduce((total, module) => {
+  let fuelNeeded = Math.floor(module / 3) - 2;
+  let fuelForFuel = 0;
+  while (fuelNeeded > 0) {
+    fuelForFuel += fuelNeeded;
+    fuelNeeded = Math.floor(fuelNeeded / 3) - 2;
+  }
+  return fuelForFuel + total;
+}, 0);
+
+console.log(secondProblem);
