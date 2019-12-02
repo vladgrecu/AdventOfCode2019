@@ -1,7 +1,7 @@
 const intCode = [
   1,
-  0,
-  0,
+  12,
+  2,
   3,
   1,
   1,
@@ -168,26 +168,28 @@ const intCode = [
 
 const add = (a, b) => a + b;
 const multiply = (a, b) => a * b;
-const casses = (opcode, firstPosition, secondPosition, resultPosition) => {
-  console.log(opcode);
+const resolveCases = (opcode, firstElement, secondElement, position) => {
   switch (opcode) {
     case 1:
-      intCode[resultPosition] = add(firstPosition, secondPosition);
+      intCode[position] = add(firstElement, secondElement);
       break;
     case 2:
-      intCode[resultPosition] = multiply(firstPosition, secondPosition);
-      break;
+      intCode[position] = multiply(firstElement, secondElement);
     case 99:
       break;
     default:
       break;
   }
 };
-function getFinalResult() {
+const finalResult = () => {
   for (let i = 0; i < intCode.length; i += 4) {
-    casses(intCode[i], intCode[i + 1], intCode[i + 2], intCode[i + 3]);
+    let opcode = intCode[i];
+    let firstElement = intCode[intCode[i + 1]];
+    let secondElement = intCode[intCode[i + 2]];
+    let position = intCode[i + 3];
+    resolveCases(opcode, firstElement, secondElement, position);
   }
-}
+  return intCode[0];
+};
 
-let finalResult = getFinalResult();
-console.log(finalResult);
+console.log(finalResult());
