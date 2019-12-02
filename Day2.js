@@ -1,7 +1,7 @@
 const intCode = [
   1,
-  12,
-  2,
+  0,
+  0,
   3,
   1,
   1,
@@ -165,31 +165,44 @@ const intCode = [
   0,
   0
 ];
-
 const add = (a, b) => a + b;
 const multiply = (a, b) => a * b;
-const resolveCases = (opcode, firstElement, secondElement, position) => {
-  switch (opcode) {
-    case 1:
-      intCode[position] = add(firstElement, secondElement);
+const resolveCases = input => {
+  for (let i = 0; i < input.length; i += 4) {
+    const pos1 = input[i + 1];
+    const pos2 = input[i + 2];
+    const pos3 = input[i + 3];
+
+    if (input[i] === 1) {
+      input[pos3] = add(input[pos1], input[pos2]);
+    } else if (input[i] === 2) {
+      input[pos3] = multiply(input[pos1], input[pos2]);
+    } else if (input[i] === 99) {
       break;
-    case 2:
-      intCode[position] = multiply(firstElement, secondElement);
-    case 99:
-      break;
-    default:
-      break;
+    }
   }
 };
-const finalResult = () => {
-  for (let i = 0; i < intCode.length; i += 4) {
-    let opcode = intCode[i];
-    let firstElement = intCode[intCode[i + 1]];
-    let secondElement = intCode[intCode[i + 2]];
-    let position = intCode[i + 3];
-    resolveCases(opcode, firstElement, secondElement, position);
-  }
-  return intCode[0];
+const problem1 = () => {
+  const input = [...intCode];
+  input[1] = 12;
+  input[2] = 2;
+  resolveCases(input);
+  return input[0];
 };
 
-console.log(finalResult());
+const problem2 = () => {
+  for (let i = 0; i < 100; i++) {
+    for (let j = 0; j < 100; j++) {
+      const input = [...intCode];
+      input[1] = i;
+      input[2] = j;
+      resolveCases(input);
+      if (input[0] === 19690720) {
+        console.log(i * 100 + j);
+        break;
+      }
+    }
+  }
+};
+console.log(problem1());
+console.log(problem2());
