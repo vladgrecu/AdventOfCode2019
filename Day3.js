@@ -34,5 +34,5 @@ crossings.forEach(coords => {
   problem2.push(paths[0][coords] + paths[1][coords]);
 });
 
-console.log("Sum1: ", Math.min(...problem1));
-console.log("Sum2: ", Math.min(...problem2));
+console.log("Problem1: ", Math.min(...problem1));
+console.log("Problem2: ", Math.min(...problem2));
