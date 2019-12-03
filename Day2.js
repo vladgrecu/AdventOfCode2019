@@ -165,14 +165,15 @@ const intCode = [
   0,
   0
 ];
+
 const add = (a, b) => a + b;
 const multiply = (a, b) => a * b;
+
 const resolveCases = input => {
   for (let i = 0; i < input.length; i += 4) {
     const pos1 = input[i + 1];
     const pos2 = input[i + 2];
     const pos3 = input[i + 3];
-
     if (input[i] === 1) {
       input[pos3] = add(input[pos1], input[pos2]);
     } else if (input[i] === 2) {
@@ -182,6 +183,7 @@ const resolveCases = input => {
     }
   }
 };
+
 const problem1 = () => {
   const input = [...intCode];
   input[1] = 12;
@@ -198,11 +200,11 @@ const problem2 = () => {
       input[2] = j;
       resolveCases(input);
       if (input[0] === 19690720) {
-        console.log(i * 100 + j);
-        break;
+        return console.log(i * 100 + j);
       }
     }
   }
 };
+
 console.log(problem1());
 console.log(problem2());
